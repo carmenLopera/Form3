@@ -1,21 +1,24 @@
-version: '3'
+version: "3"
 
 services:
+  app:
+    image: golang:1.9-alpine
+    volumes: 
+      - .:/go/src/github.com/form3
+    working_dir: /go/src/github.com/form3
+    command: go test --cover -v ./... && go run main.go
+    links:
+      - mongo
+    environment:
+    - MONGO_URI=mongo:27017
+    container_name: "form3_service"
+ 
   mongo:
     image: "mongo:latest"
-    container_name: "mongo"
     ports:
       - "27017:27017"
-    volumes:
-      - "mongodata:/data/db"
-    networks:
-      - network1
 
-volumes:
-  mongodata:
 
-networks:
-  network1:
 
   
  

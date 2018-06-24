@@ -6,16 +6,12 @@ import (
 	"log"
 	"net/http"
 
+	"os"
+
 	data "github.com/form3/data"
 	"github.com/gorilla/mux"
 	"gopkg.in/mgo.v2/bson"
 )
-
-/*
-type Handler struct {
-	*App
-	H func(a *App, w *http.ResponseWriter, r *http.Request) error
-}*/
 
 type App struct {
 	//data base
@@ -27,22 +23,6 @@ type App struct {
 type Error interface {
 	error
 	Status() int
-}
-
-// StatusError represents an error with an associated HTTP status code.
-type StatusError struct {
-	Code int
-	Err  error
-}
-
-// Allows StatusError to satisfy the error interface.
-func (se StatusError) Error() string {
-	return se.Err.Error()
-}
-
-// Returns our HTTP status code.
-func (se StatusError) Status() int {
-	return se.Code
 }
 
 type Response map[string]interface{}
@@ -202,7 +182,8 @@ func main() {
 	r := mux.NewRouter()
 
 	dbConn := data.NewMongoDBConn()
-	dbConn.Connect("127.0.0.1:27017", "test")
+	host := os.Getenv("MONGO_URI")
+	dbConn.Connect(host, "test")
 	log.Printf(" dbConn %+v \n", dbConn)
 
 	errInd := dbConn.SetIndex("id", "test", data.PAYMENT_COLLECTION)
