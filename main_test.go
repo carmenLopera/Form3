@@ -13,7 +13,7 @@ import (
 	"errors"
 	"reflect"
 
-	data "bitbucket.org/form3/data"
+	data "github.com/Form3/data"
 	"github.com/gorilla/mux"
 	"gopkg.in/mgo.v2/bson"
 )

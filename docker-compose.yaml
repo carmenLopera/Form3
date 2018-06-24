@@ -11,7 +11,7 @@ services:
     networks:
       - network1
 
-volums:
+volumes:
   mongodata:
 
 networks:
