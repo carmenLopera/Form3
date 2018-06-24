@@ -6,7 +6,7 @@ services:
     volumes: 
       - .:/go/src/github.com/form3
     working_dir: /go/src/github.com/form3
-    command: go test --cover -v ./... && go run main.go
+    command: go run main.go
     links:
       - mongo
     environment:
