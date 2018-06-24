@@ -23,7 +23,7 @@ curl --request GET --url http://172.19.0.3:5000/payments
             
 Note: use localhost instead if the service is not running in the container.
 
-## Desing REST API documentation
+## Design REST API documentation
 
 https://documenter.getpostman.com/view/235847/form3/RWEiLxxR#8f25a0b5-7c86-bdcf-f776-63a8c34f900a
 
