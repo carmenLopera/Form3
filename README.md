@@ -6,6 +6,7 @@
 - Install docker-compose [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
 - Environment Variables: 
   - MONGO_URI : Defined in docker-compose.yaml will be taken from there if the services are ran inside Docker.
+  
   Note: inside main.go MONGO_URI defaults to localhost when MONGO_URI is empty.
 
 ## Usage
