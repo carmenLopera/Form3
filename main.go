@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	data "github.com/Form3/data"
+	data "github.com/form3/data"
 	"github.com/gorilla/mux"
 	"gopkg.in/mgo.v2/bson"
 )
