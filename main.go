@@ -20,6 +20,10 @@ func getEnv(key, defaultValue string) string {
 	return value
 }
 
+// Notes:
+// SSL for the REST API in the case is not a public API should be implemented
+// Database access should use username/password encryption in a real environment
+
 func main() {
 	log.Printf("starting\n")
 	r := mux.NewRouter()
