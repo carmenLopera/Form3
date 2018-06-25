@@ -82,11 +82,11 @@ type PaymentProvider interface {
 }
 
 type PaymentDataBase struct {
-	MongoDBConn
+	*MongoDBConn
 }
 
 func (p *PaymentDataBase) ListPayments() (payments []Payment, err error) {
-	log.Printf(" ListPayments  \n")
+	log.Printf("DataBase ListPayments  \n")
 	conn := p.GetConn()
 	defer conn.Close()
 	c := conn.DB(p.db).C(PAYMENT_COLLECTION)
@@ -95,7 +95,7 @@ func (p *PaymentDataBase) ListPayments() (payments []Payment, err error) {
 }
 
 func (p *PaymentDataBase) ListPaymentID(id bson.ObjectId) (payment *Payment, err error) {
-	log.Printf(" ListPaymentID  \n")
+	log.Printf("DataBase ListPaymentID  \n")
 	conn := p.GetConn()
 	defer conn.Close()
 	c := conn.DB(p.db).C(PAYMENT_COLLECTION)
@@ -105,7 +105,7 @@ func (p *PaymentDataBase) ListPaymentID(id bson.ObjectId) (payment *Payment, err
 
 // Create a payment
 func (p *PaymentDataBase) CreatePayment(payment Payment) (*Payment, error) {
-	log.Printf(" Create Payment  \n")
+	log.Printf("DataBase Create Payment  \n")
 	conn := p.GetConn()
 	defer conn.Close()
 	var err error
@@ -117,7 +117,7 @@ func (p *PaymentDataBase) CreatePayment(payment Payment) (*Payment, error) {
 
 // Delete a payment
 func (p *PaymentDataBase) RemovePayment(id bson.ObjectId) error {
-	log.Printf(" Remove Payment  \n")
+	log.Printf("DataBase Remove Payment  \n")
 	conn := p.GetConn()
 	defer conn.Close()
 	c := conn.DB(p.db).C(PAYMENT_COLLECTION)
@@ -126,24 +126,22 @@ func (p *PaymentDataBase) RemovePayment(id bson.ObjectId) error {
 }
 
 func (p *PaymentDataBase) UpdatePayment(payment Payment) (*Payment, error) {
-	log.Printf(" Update Payment  \n")
+	log.Printf("DataBase Update Payment  \n")
 	conn := p.GetConn()
 	defer conn.Close()
 	c := conn.DB(p.db).C(PAYMENT_COLLECTION)
 
 	// update existing object:
 	mongoID := payment.MongoID
-	log.Printf("mongoID %+v \n", mongoID)
-	log.Printf("going to update in mongo with payment %+v \n", payment)
 	err := c.Update(bson.M{"_id": mongoID}, payment)
 	log.Printf("Find return update error %+v \n", err)
 	if err != nil {
-		log.Println("err could not update:", err.Error())
+		log.Println("Error could not update:", err.Error())
 	} else {
 		updatedPayment := &Payment{}
 		err = c.Find(bson.M{"_id": mongoID}).One(updatedPayment)
 		if err == nil {
-			log.Printf("updated payment in models %+v \n", updatedPayment)
+			log.Printf("Updated payment in models %+v \n", updatedPayment)
 			return updatedPayment, err
 		} else {
 			log.Printf("Find error %+v \n", err)
