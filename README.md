@@ -8,7 +8,7 @@ Both services can be run in a Docker container without the need of installing Go
 
 - Install docker-compose [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
 - Environment Variables: 
-  - MONGO_URI : Defined in docker-compose.yaml will be taken from there if the services are ran inside Docker.
+  - MONGO_URI : Defined in docker-compose.yaml will be taken from there if the services are running inside Docker.
   
   Note: inside main.go MONGO_URI defaults to "localhost:27017" when MONGO_URI is empty.
 
