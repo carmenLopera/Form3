@@ -1,4 +1,7 @@
 # Form3
+REST API for Payments using database mongodb
+
+Both services can be run in a Docker container without the need of installing Golang or Mongodb 
 
 
 ## Pre-Requisites
